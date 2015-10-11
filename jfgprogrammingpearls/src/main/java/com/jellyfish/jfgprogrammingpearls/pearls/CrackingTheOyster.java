@@ -62,12 +62,16 @@ public class CrackingTheOyster {
             bits.set(scan.nextInt(), true);
         }
         
+        scan.close();
+        
         try (final PrintWriter writer = new PrintWriter(new File(this.output_path))) {
             for (int i = 0; i < bits.size(); i++) {
                 if (bits.get(i)) {
                     writer.println(i);
                 }
             }
+            writer.flush();
+            writer.close();
         } catch (final FileNotFoundException fnfex) {
             Logger.getLogger(CrackingTheOyster.class.getName()).log(Level.SEVERE, null, fnfex);
         }
@@ -96,6 +100,8 @@ public class CrackingTheOyster {
                 for (int i = 0; i < integers.length; i++) {
                     writer.println(StringFormatUtils.formatInteger(integers[i], maxValueLength));
                 }
+                writer.flush();
+                writer.close();
             }
 
         } catch (final FileNotFoundException ex) {
