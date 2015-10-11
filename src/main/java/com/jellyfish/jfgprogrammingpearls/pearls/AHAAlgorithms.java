@@ -6,15 +6,15 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
  * @author thw
  */
 public class AHAAlgorithms {
@@ -35,81 +35,100 @@ public class AHAAlgorithms {
     private final String anagramsFilePath = "resources/output/anagrams.txt";
     
     /**
-     * Peform the job.
+     * Peform the job - Jon Bentley's "Programming Pearls" chapter II :
+     * Sign all words in the file, then squash by word signature, finally
+     * sort array of anagrams and write to output file.
      */
     public void aHa() {
         try {
-            this.signWords();
-            this.squash(this.sortBySignatures());
-            //this.sortBySignatures();
+            this.signWords(this.frenchWordsFilePath, this.signedWordsFilePath);
+            final String[] squashedAnagrams = 
+                    this.squash(this.getSignedWordsArray(this.signedWordsFilePath));
+            this.sortSignedWords(squashedAnagrams);
+            this.write(squashedAnagrams, this.anagramsFilePath);
         } catch (final IOException ioex) {
             Logger.getLogger(AHAAlgorithms.class.getName()).log(Level.SEVERE, null, ioex);
         }
     }
-    
-    /**
-     * Sign each word.
-     */
-    private void signWords() throws IOException {
+
+    private void signWords(final String dictionaryFilePath, final String outputFile) throws IOException {
         
-        final PrintWriter writer = new PrintWriter(this.signedWordsFilePath);
-        try(BufferedReader br = new BufferedReader(new FileReader(this.frenchWordsFilePath))) {
-            for(String l; (l = br.readLine()) != null;) {
-                if (!l.contains(StringFormatUtils.SPACE)) { // Discard when é words on the same line (discard "red car").
-                    writer.println(String.format("%s %s",
-                            StringFormatUtils.getWordSignature(l.toLowerCase().toCharArray()), l));
+        try(PrintWriter writer = new PrintWriter(outputFile)) {
+            try(BufferedReader br = new BufferedReader(new FileReader(dictionaryFilePath))) {
+                for(String l; (l = br.readLine()) != null;) {
+                    // Discard x2 words on the same line (discard "red car").
+                    if (!l.contains(StringFormatUtils.SPACE)) { 
+                        writer.println(String.format("%s %s",
+                                StringFormatUtils.getWordSignature(l.toLowerCase().toCharArray()), l));
+                    }
                 }
+                br.close();
             }
-            br.close();
+            writer.flush();
         }
-        writer.flush();
-        writer.close();
+    }
+    
+    private void sortSignedWords(String[] array) {
+        // Using java.util.Arrays.sort(array) will throw a NullPointerException
+        // because the array contains multiple word lines and not closed strings.
+        // FIXME...
     }
 
-    private String[] sortBySignatures() throws IOException {
+    private String[] getSignedWordsArray(final String file) throws IOException {
 
         final List<String> entries = new ArrayList<>();
-        try(BufferedReader br = new BufferedReader(new FileReader(this.signedWordsFilePath))) {
+        try(BufferedReader br = new BufferedReader(new FileReader(file))) {
             for(String l; (l = br.readLine()) != null;) {
                 entries.add(l);
             }
+            br.close();
         }
-        final String[] toSort = new String[entries.size()];
-        entries.toArray(toSort);
-        // TODO : implement merge sort instead of calling java.util.Arrays.
-        //Arrays.sort(entries.toArray(toSort));
-        return toSort;
+        final String[] signedWords = new String[entries.size()];
+        entries.toArray(signedWords);
+        return signedWords;
     }
 
-    private void squash(final String[] array) throws IOException, FileNotFoundException {
+    private String[] squash(final String[] array) throws IOException, FileNotFoundException {
         
-        final HashMap<String, List<String>> anagrams = new HashMap<>();
+        final HashMap<String, List<String>> entries = new HashMap<>();
         String[] data = null;
         for (String value : array) {
             data = value.split(StringFormatUtils.SPACE);
-            if (data.length == 2 && data[1] != null && !data[1].isEmpty()) {
-                if (!anagrams.containsKey(data[0])) {
+            if (this.checkSignatureWordAssociation(data[0], data[1])) {
+                if (!entries.containsKey(data[0])) {
                     List<String> l = new ArrayList<>();
                     l.add(data[1]);
-                    anagrams.put(data[0], l);
+                    entries.put(data[0], l);
                 } else {
-                    anagrams.get(data[0]).add(data[1]);
+                    entries.get(data[0]).add(data[1]);
                 }
             }
         }
         
-        final PrintWriter writer = new PrintWriter(this.anagramsFilePath, "UTF-8");
-        for (List<String> list : anagrams.values()) {
-            if (list.size() > 1) {
-                StringBuilder output = new StringBuilder();
-                for (String s : list) {
-                   output.append(StringFormatUtils.SPACE + s);
-                }
-                writer.println(output);
+        final List<String> anagrams = new ArrayList<>();
+        for (Map.Entry<String, List<String>> entrySet : entries.entrySet()) {
+            if (entrySet.getValue().size() > 1) {
+                String val = "";
+                for (String s : entrySet.getValue()) val += s + StringFormatUtils.SPACE;
+                anagrams.add(val.substring(0, val.length() - 1));
             }
         }
-        writer.flush();
-        writer.close();
+        
+        final String[] squashed = new String[anagrams.size()];
+        anagrams.toArray(squashed);
+        return squashed;
+    }
+
+    private void write(final String[] squashedAnagrams, final String path) 
+            throws UnsupportedEncodingException, FileNotFoundException {
+        try (PrintWriter writer = new PrintWriter(path, "UTF-8")) {
+            for (String s : squashedAnagrams) writer.println(s);
+            writer.flush();
+        }
+    }
+
+    private boolean checkSignatureWordAssociation(final String sig, final String word) {
+        return sig != null && word != null && !sig.isEmpty() && !word.isEmpty() && !word.contains("-");
     }
     
 }
