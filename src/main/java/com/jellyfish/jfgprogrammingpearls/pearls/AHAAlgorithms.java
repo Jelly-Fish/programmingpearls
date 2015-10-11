@@ -20,19 +20,19 @@ import java.util.logging.Logger;
 public class AHAAlgorithms {
     
     /**
-     * Path to the dictionary file.
+     * Path to the dictionary file : french words only.
      */
-    private final String frenchWordsFilePath = "resources/data/liste_francais.txt";
+    private final String dictionnaireFilePath = "resources/data/words-french";
     
     /**
      * Signed words file output.
      */
-    private final String signedWordsFilePath = "resources/output/signedwords.txt";
+    private final String signedWordsFilePath = "resources/output/signedwords";
     
     /**
      * Sorted & squashed anagrams.
      */
-    private final String anagramsFilePath = "resources/output/anagrams.txt";
+    private final String anagramsFilePath = "resources/output/sorted-signed-anagrams.txt";
     
     /**
      * Peform the job - Jon Bentley's "Programming Pearls" chapter II :
@@ -41,11 +41,10 @@ public class AHAAlgorithms {
      */
     public void aHa() {
         try {
-            this.signWords(this.frenchWordsFilePath, this.signedWordsFilePath);
+            this.signWords(this.dictionnaireFilePath, this.signedWordsFilePath);
             final String[] squashedAnagrams = 
                     this.squash(this.getSignedWordsArray(this.signedWordsFilePath));
-            this.sortSignedWords(squashedAnagrams);
-            this.write(squashedAnagrams, this.anagramsFilePath);
+            this.write(this.sortSignedWords(squashedAnagrams), this.anagramsFilePath);
         } catch (final IOException ioex) {
             Logger.getLogger(AHAAlgorithms.class.getName()).log(Level.SEVERE, null, ioex);
         }
@@ -68,10 +67,24 @@ public class AHAAlgorithms {
         }
     }
     
-    private void sortSignedWords(String[] array) {
-        // Using java.util.Arrays.sort(array) will throw a NullPointerException
-        // because the array contains multiple word lines and not closed strings.
-        // FIXME...
+    private String[] sortSignedWords(final String[] array) {
+        
+        final String[] data = new String[array.length];
+        final HashMap<String, String> anagrams = new HashMap<>();
+        
+        for (int i = 0; i < array.length; i++) {
+            int firstSpaceIndex = array[i].indexOf(StringFormatUtils.SPACE);
+            data[i] = array[i].substring(0, firstSpaceIndex);
+            anagrams.put(data[i], array[i].substring(firstSpaceIndex, array[i].length()));
+        }
+        
+        java.util.Arrays.sort(data);
+        
+        for (int i = 0; i < data.length; i++) {
+            data[i] += anagrams.get(data[i]);
+        }
+        
+        return data;
     }
 
     private String[] getSignedWordsArray(final String file) throws IOException {
@@ -99,7 +112,7 @@ public class AHAAlgorithms {
                     List<String> l = new ArrayList<>();
                     l.add(data[1]);
                     entries.put(data[0], l);
-                } else {
+                } else if (!this.checkListContainsWord(data[1], entries.get(data[0]))) {
                     entries.get(data[0]).add(data[1]);
                 }
             }
@@ -108,7 +121,7 @@ public class AHAAlgorithms {
         final List<String> anagrams = new ArrayList<>();
         for (Map.Entry<String, List<String>> entrySet : entries.entrySet()) {
             if (entrySet.getValue().size() > 1) {
-                String val = "";
+                String val = entrySet.getKey() + StringFormatUtils.SPACE;
                 for (String s : entrySet.getValue()) val += s + StringFormatUtils.SPACE;
                 anagrams.add(val.substring(0, val.length() - 1));
             }
@@ -129,6 +142,14 @@ public class AHAAlgorithms {
 
     private boolean checkSignatureWordAssociation(final String sig, final String word) {
         return sig != null && word != null && !sig.isEmpty() && !word.isEmpty() && !word.contains("-");
+    }
+
+    private boolean checkListContainsWord(String word, final List<String> entries) {
+        word = word.toLowerCase();
+        for (String e : entries) {
+            if (e.toLowerCase().equals(word)) return true;
+        }
+        return false;
     }
     
 }
