@@ -4,3 +4,6 @@
 /resources/output/anagrams.txt
 /resources/output/signedwords.txt
 /resources/data/unused/
+/NBody/nbproject/private/
+/resources/output/signedwords
+/resources/output/sorted-signed-anagrams.txt

@@ -24,5 +24,19 @@ public class ArrayUtils {
             integerArray[i] = a;
         }
     }
+    
+    /**
+     * @param size The maximum array lenght for affecting rand integers.
+     * @return 
+     */
+    public static int[] randomIntegers(final int size) {
+        
+        final Random rand = new Random();
+        final int[] integers = new int[size];
+        for (int i = 0; i < integers.length; i++) {
+            integers[i] = (rand.nextInt(65536) - 32768);
+        }
+        return integers;
+    }
 
 }
