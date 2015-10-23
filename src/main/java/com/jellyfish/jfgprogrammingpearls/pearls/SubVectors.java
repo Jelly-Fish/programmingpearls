@@ -35,16 +35,54 @@ public class SubVectors {
     }
     
     /**
+     * 8.4 of Programming Pearls.
+     */
+    public void runScan() {
+        display(scan(this.vector), String.valueOf(this.vector.length), "scan(int[] v)");
+    }
+    
+    /**
+     * 8.4 of Programming Pearls.
+     */
+    public void runScan2() {
+        display(scan2(this.vector), String.valueOf(this.vector.length), "scan2(int[] v)");
+    }
+    
+    /**
+     * See Programming Pearls 8.4 scan algorithm.
+     * @param v the main array vector.
+     * @return max sub vector sum.
+     */
+    private int scan(int[] v) {
+        
+        int maxSoFar = 0, maxEndingHere = 0;
+        for (int i = 0; i < v.length; i++) {
+            maxEndingHere = this.max(maxEndingHere + v[i], 0);
+            maxSoFar = this.max(maxSoFar, maxEndingHere);
+        }
+        return maxSoFar;
+    }
+    
+    /**
+     * Scans for max sum sub vector & the sub vertor as an array.
+     * @param v main vector to scan.
+     * @return sub vector sum value.
+     */
+    private int scan2(int[] v) {
+        return this.vectorSum(this.getSubVector(this.scan(vector), v));
+    }
+    
+    
+    /**
      * See Programming Pearls 8.3 devide and conquer algorithm.
-     * @param l the start index, usualy = 0.
-     * @param u the end index of the array, array.length - 1.
-     * @return 
+     * @param l left start index (usually 0).
+     * @param u the up side of main vector (usually array length - 1).
+     * @param v the main array vector.
+     * @return max sub vector sum.
      */
     private int divideAndConquer(final int l, final int u, int[] v) {
         
-        int lMax = 0;
-        int rMax = 0;
-        int sum = 0;
+        int lMax = 0, rMax = 0, sum = 0;
         
         if (l > u || v == null) return 0; // Empty array.
         if (l == u) return this.max(0, v[l]); // 1 element.
@@ -82,7 +120,7 @@ public class SubVectors {
         }
         return max;
     }
-
+    
     /**
      * @param m the sum of max sub vector.
      * @param vLength the length of super vector.
@@ -90,6 +128,38 @@ public class SubVectors {
      */
     private void display(final int m, final String vLength, final String alg) {
         System.out.println(String.format("Max sum of sub vector.length %s = %d with algorithm %s", vLength, m, alg));
+    }
+
+    /**
+     * @param v the vector to sum up.
+     * @return sum of all entries in the vector.
+     */
+    private int vectorSum(final int[] v) {
+        int result = 0;
+        for (int i = 0; i < v.length; i++) {
+            result += v[i];
+        }
+        return result;
+    }
+
+    /**
+     * 
+     * @param maxSum
+     * @param v main vector.
+     * @return the max sum sub vector as a int array that contains a copy of
+     * the sub vector.
+     */
+    private int[] getSubVector(final int maxSum, int[] v) {
+        
+        // N^2 :S
+        for (int i = 0; i < v.length; i++) {
+            for (int j = i; j < v.length; j++) {
+                if (this.vectorSum(java.util.Arrays.copyOfRange(v, i, j)) == maxSum) {
+                    return java.util.Arrays.copyOfRange(v, i, j);
+                }
+            }
+        }
+        return v;
     }
     
 }
