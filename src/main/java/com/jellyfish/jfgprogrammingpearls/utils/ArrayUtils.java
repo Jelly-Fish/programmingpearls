@@ -38,5 +38,59 @@ public class ArrayUtils {
         }
         return integers;
     }
+    
+    /**
+     * Return max integer value from param array.
+     * @param iMax Integer array.
+     * @return max integer value from param array.
+     */
+    public static int max(Integer ... iMax) {
+        int max = Integer.MIN_VALUE;
+        for (Integer i : iMax) {
+            max = i > max ? i : max; 
+        }
+        return max;
+    }
+
+    /**
+     * @param v the array to sum up.
+     * @return sum of all entries in the array.
+     */
+    public static int arraySum(int[] v) {
+        int result = 0;
+        for (int i = 0; i < v.length; i++) result += v[i];
+        return result;
+    }
+    
+    /**
+     * sum of all entries in the array.
+     * @param v the array to sum up.
+     * @param a start index.
+     * @param b stop index.
+     * @return 
+     */
+    public static int subArraySum(int[] v, final int a, final int b) {
+        int result = 0;
+        for (int i = a; i < b + 1; i++) result += v[i];
+        return result;
+    }
+
+    /**
+     * @param maxSum
+     * @param v main array.
+     * @param u end index.
+     * @return the max summed up sub array as an array of integers that contains a copy of
+     * the sub vector.array
+     */
+    public static int[] getSubArray(final int maxSum, int[] v, final int u) {
+        // N^2 complexity.
+        for (int i = u; i > 0; i--) {
+            for (int j = u; j > 0; j--) {
+                if (ArrayUtils.subArraySum(v, j, i) == maxSum) 
+                    return java.util.Arrays.copyOfRange(v, j, i + 1);
+            }
+        }
+        return null;
+    }
 
 }
