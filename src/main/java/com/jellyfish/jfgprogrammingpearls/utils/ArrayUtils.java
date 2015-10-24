@@ -1,5 +1,6 @@
 package com.jellyfish.jfgprogrammingpearls.utils;
 
+import com.jellyfish.jfgprogrammingpearls.exceptions.SubArrayNotFoundException;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -81,8 +82,9 @@ public class ArrayUtils {
      * @param u end index.
      * @return the max summed up sub array as an array of integers that contains a copy of
      * the sub vector.array
+     * @throws com.jellyfish.jfgprogrammingpearls.exceptions.SubArrayNotFoundException
      */
-    public static int[] getSubArray(final int maxSum, int[] v, final int u) {
+    public static int[] getSubArray(final int maxSum, int[] v, final int u) throws SubArrayNotFoundException {
         // N^2 complexity.
         for (int i = u; i > 0; i--) {
             for (int j = u; j > 0; j--) {
@@ -90,7 +92,7 @@ public class ArrayUtils {
                     return java.util.Arrays.copyOfRange(v, j, i + 1);
             }
         }
-        return null;
+        throw new SubArrayNotFoundException();
     }
 
 }

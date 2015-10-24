@@ -1,5 +1,6 @@
 package com.jellyfish.jfgprogrammingpearls.pearls;
 
+import com.jellyfish.jfgprogrammingpearls.pearls.abstracts.AbstractProgrammingPearlCase;
 import com.jellyfish.jfgprogrammingpearls.utils.ArrayUtils;
 import com.jellyfish.jfgprogrammingpearls.utils.StringFormatUtils;
 import java.io.File;
@@ -15,7 +16,7 @@ import java.util.logging.Logger;
  *
  * @author thw
  */
-public class CrackingTheOyster {
+public class CrackingTheOyster extends AbstractProgrammingPearlCase  {
 
     /**
      * Size or amount of integers to sort - Value from 0 to this value excluded.

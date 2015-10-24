@@ -1,6 +1,8 @@
 package com.jellyfish.jfgprogrammingpearls.pearls;
 
 import com.jellyfish.jfgprogrammingpearls.exceptions.StopwatchException;
+import com.jellyfish.jfgprogrammingpearls.exceptions.SubArrayNotFoundException;
+import com.jellyfish.jfgprogrammingpearls.pearls.abstracts.AbstractProgrammingPearlCase;
 import com.jellyfish.jfgprogrammingpearls.utils.ArrayUtils;
 import com.jellyfish.jfgprogrammingpearls.utils.StopwatchUtils;
 import java.util.logging.Level;
@@ -12,7 +14,7 @@ import java.util.logging.Logger;
  *
  * @author thw
  */
-public class SubVectors {
+public class SubVectors extends AbstractProgrammingPearlCase  {
     
     /**
      * The main vector.
@@ -24,6 +26,11 @@ public class SubVectors {
      * Length = 0 if all entries of vector are smaller or equal to ZERO.
      */
     private int[] maxSumSubVector;
+    
+    /**
+     * Desired generic output.
+     */
+    private final String output = "Max sum of sub vector.length %s = %d with algorithm %s";
 
     /**
      * Constructor.
@@ -39,8 +46,9 @@ public class SubVectors {
     public void runDivideAndConquer() {
         try {
             StopwatchUtils.start();
-            display(divideAndConquer(0, this.vector.length - 1, this.vector), String.valueOf(this.vector.length),
-                    String.format("divideAndConquer(0, v.length - 1, int[] v); runtime=%d", StopwatchUtils.stopNS()));
+            final int r = divideAndConquer(0, this.vector.length - 1, this.vector);
+            final String inf = String.format("divideAndConquer(0, v.length - 1, int[] v); runtime=%d", StopwatchUtils.stopNS());
+            this.writer.println(String.format(output, this.vector.length, r, inf));
         } catch (final StopwatchException ex) {
             Logger.getLogger(SubVectors.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -52,8 +60,9 @@ public class SubVectors {
     public void runScan() {
         try {
             StopwatchUtils.start();
-            display(scan(this.vector), String.valueOf(this.vector.length),
-                    String.format("scan(int[] v); runtime=%d", StopwatchUtils.stopNS()));
+            final int r = scan(this.vector);
+            final String inf = String.format("scan(int[] v); runtime=%d", StopwatchUtils.stopNS());
+            this.writer.println(String.format(output, this.vector.length, r, inf));
         } catch (final StopwatchException ex) {
             Logger.getLogger(SubVectors.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -65,9 +74,12 @@ public class SubVectors {
     public void runScan2() {
         try {
             StopwatchUtils.start();
-            display(ArrayUtils.arraySum(scan2(this.vector)), String.valueOf(this.vector.length),
-                    String.format("scan2(int[] v); runtime=%d", StopwatchUtils.stopNS()));
+            final int r = ArrayUtils.arraySum(scan2(this.vector));
+            final String inf = String.format("scan2(int[] v); runtime=%d", StopwatchUtils.stopNS());
+            this.writer.println(String.format(output, this.vector.length, r, inf));
         } catch (final StopwatchException ex) {
+            Logger.getLogger(SubVectors.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (final SubArrayNotFoundException ex) {
             Logger.getLogger(SubVectors.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -91,10 +103,12 @@ public class SubVectors {
      * Scans for max sum sub vector & the sub vertor as an array.
      * @param v main vector to scan.
      * @return max sum sub vector.
+     * @throws SubArrayNotFoundException 
      */
-    private int[] scan2(int[] v) {
+    private int[] scan2(int[] v) throws SubArrayNotFoundException {
         
         // integer eI = end index of sub vector in v, sI = start index.
+        @SuppressWarnings("UnusedAssignment")
         int maxSoFar = 0, maxEndingHere = 0, tempMax = 0, eI = 0;
 
         for (int i = 0; i < v.length; i++) {
@@ -141,15 +155,6 @@ public class SubVectors {
         }
         
         return ArrayUtils.max(lMax + rMax, divideAndConquer(l, m, v), divideAndConquer(m + 1, u, v));
-    }
-    
-    /**
-     * @param m the sum of max sub vector.
-     * @param vLength the length of super vector.
-     * @param alg the algorithm used.
-     */
-    private void display(final int m, final String vLength, final String alg) {
-        System.out.println(String.format("Max sum of sub vector.length %s = %d with algorithm %s", vLength, m, alg));
     }
     
 }

@@ -1,5 +1,6 @@
 package com.jellyfish.jfgprogrammingpearls.pearls;
 
+import com.jellyfish.jfgprogrammingpearls.pearls.abstracts.AbstractProgrammingPearlCase;
 import com.jellyfish.jfgprogrammingpearls.utils.StringFormatUtils;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -17,7 +18,7 @@ import java.util.logging.Logger;
 /**
  * @author thw
  */
-public class AHAAlgorithms {
+public class AHAAlgorithms extends AbstractProgrammingPearlCase {
     
     /**
      * Path to the dictionary file : french words only.
