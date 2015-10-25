@@ -1,6 +1,7 @@
 package com.jellyfish.jfgprogrammingpearls.ui.subvector;
 
 import com.jellyfish.jfgprogrammingpearls.exceptions.SubArrayNotFoundException;
+import com.jellyfish.jfgprogrammingpearls.pearls.SubVectors;
 import com.jellyfish.jfgprogrammingpearls.starter.ProgrammingPearls;
 import com.jellyfish.jfgprogrammingpearls.ui.Writable;
 import com.jellyfish.jfgprogrammingpearls.utils.ArrayUtils;
@@ -117,6 +118,7 @@ public class VectorGraphDialog extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
+    @SuppressWarnings("ResultOfObjectAllocationIgnored")
     private void generateGraphButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateGraphButtonActionPerformed
         
         try {
@@ -133,7 +135,8 @@ public class VectorGraphDialog extends javax.swing.JDialog {
                 this.writer.print(String.valueOf(v[i]) + "/");
             }
             
-            final int[] subVector = ProgrammingPearls.subVector(v);
+            final SubVectors sv = new SubVectors(v);
+            final int[] subVector = sv.scan2();
             
             // Print the sub vector to console :
             this.writer.println("\n\nMax sum sub vector's entries - sub vector size=" + subVector.length);
@@ -144,10 +147,9 @@ public class VectorGraphDialog extends javax.swing.JDialog {
                 this.writer.print(String.valueOf(v[i]) + "/");
             }
             
-            new SubVectorGraphFrame(new SubVectorPanel(v, subVector));
+            new SubVectorGraphFrame(new SubVectorPanel(v, subVector, sv.subVectorEndIndex));
             this.setVisible(false);
             this.dispose();
-            
         } catch (final SubArrayNotFoundException ex) {
             Logger.getLogger(VectorGraphDialog.class.getName()).log(Level.SEVERE, null, ex);
         }

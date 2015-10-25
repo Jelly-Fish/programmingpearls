@@ -100,15 +100,4 @@ public class ProgrammingPearls {
         }
     }
     
-    /**
-     * Vector detail or size.
-     * @param v main vector. 
-     * @return array of sub vector entries.
-     * @throws com.jellyfish.jfgprogrammingpearls.exceptions.SubArrayNotFoundException
-     */
-    public static int[] subVector(final int[] v) throws SubArrayNotFoundException {
-        final SubVectors sv = new SubVectors(v);
-        return sv.scan2();
-    }
-    
 }

@@ -22,12 +22,13 @@ public class SubVectorGraphFrame extends javax.swing.JFrame {
         initComponents();
         Image icon = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB_PRE);
         this.setIconImage(icon);
-        
-        scrollPane = new javax.swing.JScrollPane(p);
-        scrollPane.setBorder(BorderFactory.createEmptyBorder());
+        this.scrollPane = new javax.swing.JScrollPane(p);
+        this.scrollPane.setBorder(BorderFactory.createEmptyBorder());
+        this.scrollPane.setDoubleBuffered(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(new java.awt.BorderLayout());
         this.add(scrollPane, java.awt.BorderLayout.CENTER);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);
         this.setVisible(true);
     }
@@ -64,8 +65,7 @@ public class SubVectorGraphFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        this.setVisible(false);
-
+        this.dispose();
     }//GEN-LAST:event_formWindowClosing
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

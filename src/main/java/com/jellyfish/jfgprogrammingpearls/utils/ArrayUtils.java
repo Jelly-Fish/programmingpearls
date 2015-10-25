@@ -39,7 +39,6 @@ public class ArrayUtils {
         final int[] integers = new int[size];
         for (int i = 0; i < integers.length; i++) {
             integers[i] = rand.nextInt(32767 + 32768) - 32768;
-            //(rand.nextInt(65536) - 32768);
         }
         return integers;
     }

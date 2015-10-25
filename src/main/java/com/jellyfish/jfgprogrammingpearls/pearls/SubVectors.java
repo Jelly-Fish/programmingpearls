@@ -29,6 +29,11 @@ public class SubVectors extends AbstractProgrammingPearlCase  {
      * Desired generic output.
      */
     private final String output = "Max sum of sub vector.length %s = %d with algorithm %s";
+    
+    /**
+     * The end index of sub vector.
+     */
+    public int subVectorEndIndex = -1;
 
     /**
      * Constructor.
@@ -104,7 +109,7 @@ public class SubVectors extends AbstractProgrammingPearlCase  {
      * @return max sum sub vector.
      * @throws SubArrayNotFoundException 
      */
-    private int[] scan2(int[] v) throws SubArrayNotFoundException {
+    public int[] scan2(int[] v) throws SubArrayNotFoundException {
         
         // integer eI = end index of sub vector in v, sI = start index.
         @SuppressWarnings("UnusedAssignment")
@@ -117,6 +122,7 @@ public class SubVectors extends AbstractProgrammingPearlCase  {
             maxSoFar = tempMax > maxSoFar ? tempMax : maxSoFar;
         }
         
+        this.subVectorEndIndex = eI;
         return ArrayUtils.getSubArray(maxSoFar, v, eI);
     }
     

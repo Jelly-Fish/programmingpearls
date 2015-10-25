@@ -132,7 +132,7 @@ public class Console extends javax.swing.JFrame implements Writable {
     }//GEN-LAST:event_textAreaKeyReleased
 
     private void subVectorGraphMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subVectorGraphMenuItemActionPerformed
-        new VectorGraphDialog(this, this);
+        final VectorGraphDialog vDialog = new VectorGraphDialog(this, this);
     }//GEN-LAST:event_subVectorGraphMenuItemActionPerformed
 
     @Override
