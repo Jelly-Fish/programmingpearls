@@ -8,8 +8,6 @@ import com.jellyfish.jfgprogrammingpearls.utils.StopwatchUtils;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
-
 /**
  *
  * @author thw
@@ -48,9 +46,10 @@ public class SubVectors extends AbstractProgrammingPearlCase  {
             StopwatchUtils.start();
             final int r = divideAndConquer(0, this.vector.length - 1, this.vector);
             final String inf = String.format("divideAndConquer(0, v.length - 1, int[] v); runtime=%d", StopwatchUtils.stopNS());
-            this.writer.println(String.format(output, this.vector.length, r, inf));
+            writer.println(String.format(output, this.vector.length, r, inf));
         } catch (final StopwatchException ex) {
             Logger.getLogger(SubVectors.class.getName()).log(Level.SEVERE, null, ex);
+            writer.println(ex.getMessage());
         }
     }
     
@@ -62,9 +61,10 @@ public class SubVectors extends AbstractProgrammingPearlCase  {
             StopwatchUtils.start();
             final int r = scan(this.vector);
             final String inf = String.format("scan(int[] v); runtime=%d", StopwatchUtils.stopNS());
-            this.writer.println(String.format(output, this.vector.length, r, inf));
+            writer.println(String.format(output, this.vector.length, r, inf));
         } catch (final StopwatchException ex) {
             Logger.getLogger(SubVectors.class.getName()).log(Level.SEVERE, null, ex);
+            writer.println(ex.getMessage());
         }
     }
     
@@ -76,11 +76,10 @@ public class SubVectors extends AbstractProgrammingPearlCase  {
             StopwatchUtils.start();
             final int r = ArrayUtils.arraySum(scan2(this.vector));
             final String inf = String.format("scan2(int[] v); runtime=%d", StopwatchUtils.stopNS());
-            this.writer.println(String.format(output, this.vector.length, r, inf));
-        } catch (final StopwatchException ex) {
+            writer.println(String.format(output, this.vector.length, r, inf));
+        } catch (final StopwatchException | SubArrayNotFoundException ex) {
             Logger.getLogger(SubVectors.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (final SubArrayNotFoundException ex) {
-            Logger.getLogger(SubVectors.class.getName()).log(Level.SEVERE, null, ex);
+            writer.println(ex.getMessage());
         }
     }
     
@@ -121,6 +120,13 @@ public class SubVectors extends AbstractProgrammingPearlCase  {
         return ArrayUtils.getSubArray(maxSoFar, v, eI);
     }
     
+    /**
+     * @return max sum sub vector.
+     * @throws SubArrayNotFoundException 
+     */
+    public int[] scan2() throws SubArrayNotFoundException {
+        return this.scan2(this.vector);
+    }
     
     /**
      * See Programming Pearls 8.3 devide and conquer algorithm.

@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.jellyfish.jfgprogrammingpearls.ui;
 
+import com.jellyfish.jfgprogrammingpearls.ui.subvector.VectorGraphDialog;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import javafx.scene.input.KeyCode;
@@ -48,6 +44,10 @@ public class Console extends javax.swing.JFrame implements Writable {
         containerPanel = new javax.swing.JPanel();
         scrollPane = new javax.swing.JScrollPane();
         textArea = new javax.swing.JTextArea();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        fileMenu = new javax.swing.JMenu();
+        graphicsMenu = new javax.swing.JMenu();
+        subVectorGraphMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Programming Pearls");
@@ -82,9 +82,26 @@ public class Console extends javax.swing.JFrame implements Writable {
         containerPanelLayout.setVerticalGroup(
             containerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(containerPanelLayout.createSequentialGroup()
-                .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 644, Short.MAX_VALUE)
+                .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 619, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
+
+        fileMenu.setText("File");
+        jMenuBar1.add(fileMenu);
+
+        graphicsMenu.setText("Graphics");
+
+        subVectorGraphMenuItem.setText("Generate max sub vector graph");
+        subVectorGraphMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                subVectorGraphMenuItemActionPerformed(evt);
+            }
+        });
+        graphicsMenu.add(subVectorGraphMenuItem);
+
+        jMenuBar1.add(graphicsMenu);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -114,6 +131,10 @@ public class Console extends javax.swing.JFrame implements Writable {
         }
     }//GEN-LAST:event_textAreaKeyReleased
 
+    private void subVectorGraphMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subVectorGraphMenuItemActionPerformed
+        new VectorGraphDialog(this, this);
+    }//GEN-LAST:event_subVectorGraphMenuItemActionPerformed
+
     @Override
     public void print(final String e) {
         this.textArea.append(e);
@@ -126,7 +147,11 @@ public class Console extends javax.swing.JFrame implements Writable {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel containerPanel;
+    private javax.swing.JMenu fileMenu;
+    private javax.swing.JMenu graphicsMenu;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane scrollPane;
+    private javax.swing.JMenuItem subVectorGraphMenuItem;
     private javax.swing.JTextArea textArea;
     // End of variables declaration//GEN-END:variables
 

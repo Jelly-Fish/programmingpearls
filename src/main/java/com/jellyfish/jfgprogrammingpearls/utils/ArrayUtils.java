@@ -10,6 +10,9 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class ArrayUtils {
 
+    public static int MAX_RAND_VALUE = 32767;
+    public static double MAX_RAND_VALUE_DOUBLE = 32767.0;
+    
     /**
      * Implementing Fisher–Yates shuffle
      * @param integerArray the array to shuffle.
@@ -35,7 +38,8 @@ public class ArrayUtils {
         final Random rand = new Random();
         final int[] integers = new int[size];
         for (int i = 0; i < integers.length; i++) {
-            integers[i] = (rand.nextInt(65536) - 32768);
+            integers[i] = rand.nextInt(32767 + 32768) - 32768;
+            //(rand.nextInt(65536) - 32768);
         }
         return integers;
     }
