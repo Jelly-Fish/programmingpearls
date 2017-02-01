@@ -1,6 +1,6 @@
-package com.jellyfish.jfgprogrammingpearls.utils;
+package fr.com.jfish.jfgprogrammingpearls.utils;
 
-import com.jellyfish.jfgprogrammingpearls.exceptions.SubArrayNotFoundException;
+import fr.com.jfish.jfgprogrammingpearls.exceptions.SubArrayNotFoundException;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -44,7 +44,7 @@ public class ArrayUtils {
     }
     
     /**
-     * Return max integer value from param array.
+     * Return max integer value from array.
      * @param iMax Integer array.
      * @return max integer value from param array.
      */
@@ -85,7 +85,7 @@ public class ArrayUtils {
      * @param u end index.
      * @return the max summed up sub array as an array of integers that contains a copy of
      * the sub vector.array
-     * @throws com.jellyfish.jfgprogrammingpearls.exceptions.SubArrayNotFoundException
+     * @throws fr.com.jfish.jfgprogrammingpearls.exceptions.SubArrayNotFoundException
      */
     public static int[] getSubArray(final int maxSum, int[] v, final int u) throws SubArrayNotFoundException {
         // N^2 complexity.

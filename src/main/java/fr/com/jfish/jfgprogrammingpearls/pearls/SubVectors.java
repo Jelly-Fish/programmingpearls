@@ -1,10 +1,10 @@
-package com.jellyfish.jfgprogrammingpearls.pearls;
+package fr.com.jfish.jfgprogrammingpearls.pearls;
 
-import com.jellyfish.jfgprogrammingpearls.exceptions.StopwatchException;
-import com.jellyfish.jfgprogrammingpearls.exceptions.SubArrayNotFoundException;
-import com.jellyfish.jfgprogrammingpearls.pearls.abstracts.AbstractProgrammingPearlCase;
-import com.jellyfish.jfgprogrammingpearls.utils.ArrayUtils;
-import com.jellyfish.jfgprogrammingpearls.utils.StopwatchUtils;
+import fr.com.jfish.jfgprogrammingpearls.exceptions.StopwatchException;
+import fr.com.jfish.jfgprogrammingpearls.exceptions.SubArrayNotFoundException;
+import fr.com.jfish.jfgprogrammingpearls.pearls.abstracts.AbstractProgrammingPearlCase;
+import fr.com.jfish.jfgprogrammingpearls.utils.ArrayUtils;
+import fr.com.jfish.jfgprogrammingpearls.utils.StopwatchUtils;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -50,7 +50,7 @@ public class SubVectors extends AbstractProgrammingPearlCase  {
         try {
             StopwatchUtils.start();
             final int r = divideAndConquer(0, this.vector.length - 1, this.vector);
-            final String inf = String.format("divideAndConquer(0, v.length - 1, int[] v); runtime=%d", StopwatchUtils.stopNS());
+            final String inf = String.format("divideAndConquer(0, v.length - 1, int[] v); runtime=%d ns", StopwatchUtils.stopNS());
             writer.println(String.format(output, this.vector.length, r, inf));
         } catch (final StopwatchException ex) {
             Logger.getLogger(SubVectors.class.getName()).log(Level.SEVERE, null, ex);
@@ -65,7 +65,7 @@ public class SubVectors extends AbstractProgrammingPearlCase  {
         try {
             StopwatchUtils.start();
             final int r = scan(this.vector);
-            final String inf = String.format("scan(int[] v); runtime=%d", StopwatchUtils.stopNS());
+            final String inf = String.format("scan(int[] v); runtime=%d ns", StopwatchUtils.stopNS());
             writer.println(String.format(output, this.vector.length, r, inf));
         } catch (final StopwatchException ex) {
             Logger.getLogger(SubVectors.class.getName()).log(Level.SEVERE, null, ex);
@@ -80,7 +80,7 @@ public class SubVectors extends AbstractProgrammingPearlCase  {
         try {
             StopwatchUtils.start();
             final int r = ArrayUtils.arraySum(scan2(this.vector));
-            final String inf = String.format("scan2(int[] v); runtime=%d", StopwatchUtils.stopNS());
+            final String inf = String.format("scan2(int[] v); runtime=%d ns", StopwatchUtils.stopNS());
             writer.println(String.format(output, this.vector.length, r, inf));
         } catch (final StopwatchException | SubArrayNotFoundException ex) {
             Logger.getLogger(SubVectors.class.getName()).log(Level.SEVERE, null, ex);

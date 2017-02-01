@@ -1,12 +1,12 @@
-package com.jellyfish.jfgprogrammingpearls.starter;
+package fr.com.jfish.jfgprogrammingpearls.starter;
 
-import com.jellyfish.jfgprogrammingpearls.exceptions.StopwatchException;
-import com.jellyfish.jfgprogrammingpearls.pearls.AHAAlgorithms;
-import com.jellyfish.jfgprogrammingpearls.pearls.CrackingTheOyster;
-import com.jellyfish.jfgprogrammingpearls.pearls.SubVectors;
-import com.jellyfish.jfgprogrammingpearls.utils.ArrayUtils;
-import com.jellyfish.jfgprogrammingpearls.utils.FileUtils;
-import com.jellyfish.jfgprogrammingpearls.utils.StopwatchUtils;
+import fr.com.jfish.jfgprogrammingpearls.exceptions.StopwatchException;
+import fr.com.jfish.jfgprogrammingpearls.pearls.AHAAlgorithms;
+import fr.com.jfish.jfgprogrammingpearls.pearls.CrackingTheOyster;
+import fr.com.jfish.jfgprogrammingpearls.pearls.SubVectors;
+import fr.com.jfish.jfgprogrammingpearls.utils.ArrayUtils;
+import fr.com.jfish.jfgprogrammingpearls.utils.FileUtils;
+import fr.com.jfish.jfgprogrammingpearls.utils.StopwatchUtils;
 import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -86,9 +86,9 @@ public class ProgrammingPearls {
             sv.runDivideAndConquer();
             sv.runScan();
             sv.runScan2();
-            
+           
             // = ?
-            sv = new SubVectors(ArrayUtils.randomIntegers(1000));
+            sv = new SubVectors(ArrayUtils.randomIntegers(100000));
             sv.runDivideAndConquer();
             sv.runScan();
             sv.runScan2();

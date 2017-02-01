@@ -1,9 +1,9 @@
-package com.jellyfish.jfgprogrammingpearls.ui.subvector;
+package fr.com.jfish.jfgprogrammingpearls.ui.subvector;
 
-import com.jellyfish.jfgprogrammingpearls.exceptions.SubArrayNotFoundException;
-import com.jellyfish.jfgprogrammingpearls.pearls.SubVectors;
-import com.jellyfish.jfgprogrammingpearls.ui.Writable;
-import com.jellyfish.jfgprogrammingpearls.utils.ArrayUtils;
+import fr.com.jfish.jfgprogrammingpearls.exceptions.SubArrayNotFoundException;
+import fr.com.jfish.jfgprogrammingpearls.pearls.SubVectors;
+import fr.com.jfish.jfgprogrammingpearls.ui.Writable;
+import fr.com.jfish.jfgprogrammingpearls.utils.ArrayUtils;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

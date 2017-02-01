@@ -1,7 +1,7 @@
-package com.jellyfish.jfgprogrammingpearls.pearls.abstracts;
+package fr.com.jfish.jfgprogrammingpearls.pearls.abstracts;
 
-import com.jellyfish.jfgprogrammingpearls.ui.Console;
-import com.jellyfish.jfgprogrammingpearls.ui.Writable;
+import fr.com.jfish.jfgprogrammingpearls.ui.Console;
+import fr.com.jfish.jfgprogrammingpearls.ui.Writable;
 
 /**
  *

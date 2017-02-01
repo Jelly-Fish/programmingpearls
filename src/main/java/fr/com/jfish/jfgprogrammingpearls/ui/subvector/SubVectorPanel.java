@@ -1,6 +1,6 @@
-package com.jellyfish.jfgprogrammingpearls.ui.subvector;
+package fr.com.jfish.jfgprogrammingpearls.ui.subvector;
 
-import com.jellyfish.jfgprogrammingpearls.utils.ArrayUtils;
+import fr.com.jfish.jfgprogrammingpearls.utils.ArrayUtils;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;

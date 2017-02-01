@@ -1,7 +1,7 @@
-package com.jellyfish.jfgprogrammingpearls.pearls;
+package fr.com.jfish.jfgprogrammingpearls.pearls;
 
-import com.jellyfish.jfgprogrammingpearls.pearls.abstracts.AbstractProgrammingPearlCase;
-import com.jellyfish.jfgprogrammingpearls.utils.StringFormatUtils;
+import fr.com.jfish.jfgprogrammingpearls.pearls.abstracts.AbstractProgrammingPearlCase;
+import fr.com.jfish.jfgprogrammingpearls.utils.StringFormatUtils;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;

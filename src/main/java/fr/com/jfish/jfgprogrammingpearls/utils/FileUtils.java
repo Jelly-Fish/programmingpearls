@@ -1,4 +1,4 @@
-package com.jellyfish.jfgprogrammingpearls.utils;
+package fr.com.jfish.jfgprogrammingpearls.utils;
 
 import java.io.File;
 

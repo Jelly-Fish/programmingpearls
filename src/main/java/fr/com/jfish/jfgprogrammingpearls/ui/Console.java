@@ -1,6 +1,6 @@
-package com.jellyfish.jfgprogrammingpearls.ui;
+package fr.com.jfish.jfgprogrammingpearls.ui;
 
-import com.jellyfish.jfgprogrammingpearls.ui.subvector.VectorGraphDialog;
+import fr.com.jfish.jfgprogrammingpearls.ui.subvector.VectorGraphDialog;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import javafx.scene.input.KeyCode;

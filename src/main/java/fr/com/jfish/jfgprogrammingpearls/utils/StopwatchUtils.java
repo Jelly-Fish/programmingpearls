@@ -1,6 +1,6 @@
-package com.jellyfish.jfgprogrammingpearls.utils;
+package fr.com.jfish.jfgprogrammingpearls.utils;
 
-import com.jellyfish.jfgprogrammingpearls.exceptions.StopwatchException;
+import fr.com.jfish.jfgprogrammingpearls.exceptions.StopwatchException;
 
 /**
  *

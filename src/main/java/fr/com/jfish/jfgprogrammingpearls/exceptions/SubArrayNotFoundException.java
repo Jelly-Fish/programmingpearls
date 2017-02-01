@@ -1,4 +1,4 @@
-package com.jellyfish.jfgprogrammingpearls.exceptions;
+package fr.com.jfish.jfgprogrammingpearls.exceptions;
 
 /**
  *

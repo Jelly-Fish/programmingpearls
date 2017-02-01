@@ -1,4 +1,4 @@
-package com.jellyfish.jfgprogrammingpearls.ui;
+package fr.com.jfish.jfgprogrammingpearls.ui;
 
 /**
  *

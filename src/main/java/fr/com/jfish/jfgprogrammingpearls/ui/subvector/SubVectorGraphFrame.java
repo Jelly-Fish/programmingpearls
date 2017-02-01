@@ -1,4 +1,4 @@
-package com.jellyfish.jfgprogrammingpearls.ui.subvector;
+package fr.com.jfish.jfgprogrammingpearls.ui.subvector;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;
